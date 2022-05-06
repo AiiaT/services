@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [state, setState] = React.useState({
+		master: '',
+		description: '',
+	});
+	const api = 'http://kaiaman.pythonanywhere.com/masters/5/';
+	fetch(api)
+		.then(response => response.json())
+		.then(data => {
+			setState({
+				master: data,
+			});
+		});
+
+	const MasterTwo = masterT => {
+		return <div></div>;
+	};
+	return (
+		<div className='App'>
+			<h1>
+				Имя - {state.master.name}
+				<br />
+			</h1>
+			<p>Описание - {state.master.description}</p>
+		</div>
+	);
 }
 
 export default App;
